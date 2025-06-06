@@ -20,17 +20,20 @@ class ElectronApp {
                 contextIsolation: true,
                 preload: path.join(__dirname, 'preload.js'),
                 webSecurity: false, // Allow webview access
-                allowRunningInsecureContent: true
+                allowRunningInsecureContent: true,
+                webviewTag: true, // Enable webview tag
+                experimentalFeatures: true, // Enable experimental features
+                backgroundThrottling: false // Prevent background throttling
             },
             icon: path.join(__dirname, 'assets', 'icon.png'),
             show: false,
             titleBarStyle: 'default',
             autoHideMenuBar: !this.isDev
         });
-
+    
         // Load the HTML file
         this.mainWindow.loadFile(path.join(__dirname, 'src', 'index.html'));
-
+    
         // Show window when ready
         this.mainWindow.once('ready-to-show', () => {
             this.mainWindow.show();
@@ -39,12 +42,39 @@ class ElectronApp {
                 this.mainWindow.webContents.openDevTools();
             }
         });
-
+    
+        // Handle webview creation
+        this.mainWindow.webContents.on('will-attach-webview', (event, webPreferences, params) => {
+            // Secure webview preferences
+            webPreferences.nodeIntegration = false;
+            webPreferences.contextIsolation = true;
+            webPreferences.webSecurity = false;
+            webPreferences.allowRunningInsecureContent = true;
+            
+            // Allow specific domains
+            const allowedDomains = [
+                'xbox.com',
+                'live.com',
+                'microsoft.com',
+                'microsoftonline.com'
+            ];
+            
+            const url = new URL(params.src);
+            const isAllowed = allowedDomains.some(domain => 
+                url.hostname.includes(domain)
+            );
+            
+            if (!isAllowed) {
+                console.warn('Blocked webview navigation to:', params.src);
+                event.preventDefault();
+            }
+        });
+    
         // Handle window closed
         this.mainWindow.on('closed', () => {
             this.mainWindow = null;
         });
-
+    
         // Handle window close request
         this.mainWindow.on('close', async (event) => {
             if (this.pythonProcess) {

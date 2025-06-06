@@ -480,3 +480,119 @@ body {
         font-size: 2rem;
     }
 }
+
+
+.session-container {
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.session-header {
+    background: #2a2a2a;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.session-title {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.session-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.session-status {
+    color: #888;
+    font-size: 12px;
+    min-width: 60px;
+}
+
+.session-close-btn {
+    background: #ff4444;
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.session-close-btn:hover {
+    background: #ff6666;
+}
+
+.session-webview {
+    width: 100%;
+    height: 500px;
+    border: none;
+    background: #000;
+}
+
+/* Loading state styles */
+.session-webview[src=""] {
+    background: #1a1a1a url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="%23666" stroke-width="2" stroke-dasharray="31.416" stroke-dashoffset="31.416"><animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/><animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/></circle></svg>') center center no-repeat;
+    background-size: 50px 50px;
+}
+
+/* Slider fixes */
+.slider {
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #333;
+    outline: none;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-primary, #007bff);
+    cursor: pointer;
+    transition: background 0.15s ease-in-out;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: var(--accent-secondary, #0056b3);
+}
+
+.slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-primary, #007bff);
+    cursor: pointer;
+    border: none;
+}
+
+.slider-container {
+    margin-bottom: 15px;
+}
+
+.slider-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.slider-value {
+    color: var(--accent-primary, #007bff);
+    font-weight: bold;
+}

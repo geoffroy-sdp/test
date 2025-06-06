@@ -78,25 +78,12 @@
                 </div>
 
                  <!-- Lobby Tab -->
-                 <div class="tab-pane" id="lobby">
-                    <div class="section">
-                        <div class="section-title">Active Sessions</div>
-                        <div class="lobby-controls">
-                            <button class="btn btn-danger" id="close-sessions-button" disabled>Close All Sessions</button>
-                            <div class="sessions-info">
-                                <span id="active-sessions-count">Active Sessions: 0</span>
-                            </div>
+                 <div id="lobby" class="tab-pane">
+                    <div class="container">
+                        <div id="lobby-container" class="sessions-container">
+                            <!-- Sessions will be added here -->
                         </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">Session Management</div>
-                        <div id="lobby-container" class="lobby-container">
-                            <!-- WebView sessions will be dynamically added here -->
-                            <div class="no-sessions-message" id="no-sessions-message">
-                                No active sessions. Go to Main tab to open Xbox sessions.
-                            </div>
-                        </div>
+                        <div id="no-sessions-message">No active sessions</div>
                     </div>
                 </div>
 
